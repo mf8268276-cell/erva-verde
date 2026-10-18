@@ -15,7 +15,24 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   color: #eaffdf;
-  background: linear-gradient(135deg, #071b12, #123d27, #8dcf72);
+  background:
+    radial-gradient(
+      ellipse at top right,
+      rgba(190, 245, 153, 0.85),
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at bottom left,
+      rgba(82, 155, 77, 0.7),
+      transparent 45%
+    ),
+    linear-gradient(
+      135deg,
+      #071b12,
+      #174c2d,
+      #a8df8a
+    );
+  background-attachment: fixed;
   min-height: 100vh;
 }
 
