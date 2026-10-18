@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Erva Verde 🌿 | Tereré</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #eaffdf;
+  background: linear-gradient(135deg, #061b10, #103b20, #07140c);
+}
+
+header {
+  text-align: center;
+  padding: 35px 15px;
+  background: linear-gradient(120deg, #07140c, #176b35, #a8ff78);
+  color: white;
+}
+
+header h1 {
+  font-size: 36px;
+  margin: 0;
+}
+
+header p {
+  margin-bottom: 0;
+}
+
+.container {
+  max-width: 750px;
+  margin: auto;
+  padding: 20px;
+}
+
+.card {
+  background: #10291b;
+  border: 1px solid #4da96b;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 18px #0005;
+}
+
+h2 {
+  color: #a8ff78;
+}
+
+.sabor {
+  display: block;
+  background: #183b26;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 15px;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 7px;
+}
+
+select, input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #76d68b;
+  border-radius: 10px;
+  background: #071b10;
+  color: white;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #44c767, #b4ff78);
+  color: #06200d;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.preco {
+  color: #b4ff78;
+  font-weight: bold;
+}
+
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #b8d9bf;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🌿 ERVA VERDE</h1>
+  <p>Seu tereré, seu momento!</p>
+  <p>🍃 Frescor e sabor em cada cuia</p>
+</header>
+
+<main class="container">
+
+  <section class="card">
+    <h2>🌱 Nossos sabores</h2>
+    <div class="sabor">🌿 Menta</div>
+    <div class="sabor">🔥 Menta Fogo</div>
+    <div class="sabor">🍒 Menta Cereja</div>
+    <div class="sabor">🍇 Menta Uva</div>
+    <div class="sabor">🍃 Pura Folha</div>
+  </section>
+
+  <section class="card">
+    <h2>💚 Monte seu pedido</h2>
+
+    <form id="pedido">
+      <label for="sabor">Escolha o sabor:</label>
+      <select id="sabor" required>
+        <option value="Menta">🌿 Menta</option>
+        <option value="Menta Fogo">🔥 Menta Fogo</option>
+        <option value="Menta Cereja">🍒 Menta Cereja</option>
+        <option value="Menta Uva">🍇 Menta Uva</option>
+        <option value="Pura Folha">🍃 Pura Folha</option>
+      </select>
+
+      <label for="peso">Escolha a quantidade:</label>
+      <select id="peso" required>
+        <option value="250">250 g — R$ 12,50</option>
+        <option value="500">500 g — R$ 25,00</option>
+        <option value="1000">1 kg — R$ 50,00</option>
+      </select>
+
+      <label for="quantidade">Número de pacotes:</label>
+      <input id="quantidade" type="number" min="1" value="1" required>
+
+      <label for="nome">Seu nome:</label>
+      <input id="nome" type="text" placeholder="Digite seu nome" required>
+
+      <label for="entrega">Entrega ou retirada:</label>
+      <select id="entrega" required>
+        <option value="Entrega">🛵 Entrega</option>
+        <option value="Retirada no local">📍 Retirada no local</option>
+      </select>
+
+      <label for="endereco">Endereço (se for entrega):</label>
+      <input id="endereco" type="text" placeholder="Rua, número e bairro">
+
+      <h2 id="total">Total: R$ 12,50</h2>
+
+      <button type="submit">📲 Fazer pedido pelo WhatsApp</button>
+    </form>
+  </section>
+
+  <section class="card">
+    <h2>✨ Por que escolher a Erva Verde?</h2>
+    <p>🍃 Sabores para refrescar seu dia.</p>
+    <p>💚 Escolha sua erva e monte seu pedido.</p>
+    <p>🛵 Consulte a disponibilidade de entrega.</p>
+  </section>
+
+</main>
+
+<footer>
+  <p>🌿 Erva Verde — Seu tereré, seu momento!</p>
+</footer>
+
+<script>
+const precos = {
+  250: 12.50,
+  500: 25.00,
+  1000: 50.00
+};
+
+const peso = document.getElementById("peso");
+const quantidade = document.getElementById("quantidade");
+const total = document.getElementById("total");
+
+function calcularTotal() {
+  const valor = precos[peso.value] * Number(quantidade.value || 1);
+  total.textContent = "Total: " + valor.toLocaleString(
+    "pt-BR",
+    { style: "currency", currency: "BRL" }
+  );
+}
+
+peso.addEventListener("change", calcularTotal);
+quantidade.addEventListener("input", calcularTotal);
+
+document.getElementById("pedido").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const sabor = document.getElementById("sabor").value;
+  const gramas = Number(peso.value);
+  const qtd = Number(quantidade.value);
+  const nome = document.getElementById("nome").value;
+  const entrega = document.getElementById("entrega").value;
+  const endereco = document.getElementById("endereco").value;
+  const valor = precos[gramas] * qtd;
+
+  // TROQUE PELO SEU NÚMERO:
+  const telefone = "5566992260204";
+
+  const mensagem =
+    "🌿 *PEDIDO — ERVA VERDE* 🌿\n\n" +
+    "Nome: " + nome + "\n" +
+    "Sabor: " + sabor + "\n" +
+    "Pacote: " + (gramas >= 1000 ? (gramas / 1000) + " kg" : gramas + " g") + "\n" +
+    "Quantidade: " + qtd + "\n" +
+    "Total dos produtos: R$ " + valor.toFixed(2).replace(".", ",") + "\n" +
+    "Modalidade: " + entrega + "\n" +
+    (entrega === "Entrega" ? "Endereço: " + (endereco || "A combinar") + "\n" : "") +
+    "\nOlá! Gostaria de confirmar meu pedido.";
+
+  if (telefone === "55DDDNUMERO") {
+    alert("Configure seu número de WhatsApp no código antes de receber pedidos.");
+    return;
+  }
+
+  window.open(
+    "https://wa.me/" + telefone + "?text=" + encodeURIComponent(mensagem),
+    "_blank"
+  );
+});
+</script>
+
+</body>
+</html>
