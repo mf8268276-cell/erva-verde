@@ -35,7 +35,29 @@ body {
   background-attachment: fixed;
   min-height: 100vh;
 }
+body::before {
+  content: "🍃";
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  font-size: 42px;
+  opacity: 0.25;
+  transform: rotate(-25deg);
+  pointer-events: none;
+  z-index: 1;
+}
 
+body::after {
+  content: "🍃";
+  position: fixed;
+  bottom: 12px;
+  left: 12px;
+  font-size: 42px;
+  opacity: 0.25;
+  transform: rotate(25deg);
+  pointer-events: none;
+  z-index: 1;
+}
 header {
   text-align: center;
   padding: 35px 15px;
