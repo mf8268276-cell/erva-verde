@@ -1,63 +1,26 @@
-
+ 
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Erva Verde 🌿| Tereré</title>
+<title>Erva Verde 🌿 | Tereré</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   color: #eaffdf;
   background:
-    radial-gradient(
-      ellipse at top right,
-      rgba(190, 245, 153, 0.85),
-      transparent 42%
-    ),
-    radial-gradient(
-      ellipse at bottom left,
-      rgba(82, 155, 77, 0.7),
-      transparent 45%
-    ),
-    linear-gradient(
-      135deg,
-      #071b12,
-      #174c2d,
-      #a8df8a
-    );
+    radial-gradient(ellipse at top right, #bef599d9, transparent 42%),
+    radial-gradient(ellipse at bottom left, #529b4db3, transparent 45%),
+    linear-gradient(135deg, #071b12, #174c2d, #a8df8a);
   background-attachment: fixed;
   min-height: 100vh;
 }
-body::before {
-  content: "🍃";
-  position: fixed;
-  top: 12px;
-  right: 12px;
-  font-size: 42px;
-  opacity: 0.25;
-  transform: rotate(-25deg);
-  pointer-events: none;
-  z-index: 1;
-}
 
-body::after {
-  content: "🍃";
-  position: fixed;
-  bottom: 12px;
-  left: 12px;
-  font-size: 42px;
-  opacity: 0.25;
-  transform: rotate(25deg);
-  pointer-events: none;
-  z-index: 1;
-}
 header {
   text-align: center;
   padding: 35px 15px;
@@ -65,29 +28,17 @@ header {
   border-bottom: 2px solid #b9f49b;
 }
 
-header h1 {
-  font-size: 36px;
-  margin: 0;
-  letter-spacing: 3px;
-}
-
-header p {
-  color: #d7ffc5;
-}
+header h1 { font-size: 34px; letter-spacing: 3px; }
+header p { color: #d7ffc5; }
 
 main {
   width: min(950px, 92%);
   margin: 25px auto;
 }
 
-h2 {
-  color: #c3f5a9;
-}
+h2 { color: #c3f5a9; }
 
-.intro {
-  text-align: center;
-  margin-bottom: 28px;
-}
+.intro { text-align: center; margin-bottom: 28px; }
 
 .produtos {
   display: grid;
@@ -96,33 +47,33 @@ h2 {
 }
 
 .produto {
-  background: rgba(5, 30, 18, 0.88);
+  background: rgba(5, 30, 18, 0.92);
   border: 1px solid #91d87a;
   border-radius: 16px;
   padding: 17px;
   box-shadow: 0 5px 18px #071b1244;
 }
 
-.produto h3 {
-  color: #c3f5a9;
-  margin-top: 0;
-}
+.produto h3 { color: #c3f5a9; margin-top: 0; }
 
 label {
   display: block;
-  margin-top: 12px;
-  margin-bottom: 5px;
+  margin-top: 14px;
+  margin-bottom: 6px;
   font-size: 14px;
 }
 
-select, input {
+input, select, textarea {
   width: 100%;
-  padding: 11px;
+  padding: 12px;
   border-radius: 9px;
   border: 1px solid #91d87a;
   background: #f5ffef;
   color: #153b25;
+  font-size: 16px;
 }
+
+textarea { resize: vertical; }
 
 button {
   border: 0;
@@ -139,15 +90,15 @@ button {
   color: #10351f;
 }
 
-.carrinho {
-  margin-top: 30px;
+.carrinho, .dados {
+  margin-top: 25px;
   background: #f2ffe9;
   color: #153b25;
   border-radius: 16px;
   padding: 20px;
 }
 
-.carrinho h2 {
+.carrinho h2, .dados h2 {
   color: #174a2b;
   margin-top: 0;
 }
@@ -197,13 +148,8 @@ footer {
 }
 
 @media (max-width: 520px) {
-  header h1 {
-    font-size: 29px;
-  }
-
-  .produtos {
-    grid-template-columns: 1fr;
-  }
+  header h1 { font-size: 28px; }
+  .produtos { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -213,6 +159,7 @@ footer {
 <header>
   <h1>🌿 ERVA VERDE</h1>
   <p>Seu tereré, seu momento! 🧉</p>
+  <p>🍃 Frescor e sabor em cada cuia</p>
 </header>
 
 <main>
@@ -225,25 +172,75 @@ footer {
 
   <section class="carrinho">
     <h2>🛒 Meu carrinho</h2>
-    <div id="itens">
-      Seu carrinho está vazio.
-    </div>
+
+    <div id="itens">Seu carrinho está vazio.</div>
 
     <div class="total">
       Total: <span id="total">R$ 0,00</span>
     </div>
 
-    <button class="whatsapp" onclick="enviarWhatsApp()">
-      Enviar pedido pelo WhatsApp
-    </button>
-
     <button class="limpar" onclick="limparCarrinho()">
       Limpar carrinho
     </button>
+  </section>
+
+  <section class="dados">
+    <h2>📋 Dados para finalizar o pedido</h2>
+
+    <form id="formPedido">
+      <label for="nome">Nome completo:</label>
+      <input id="nome" type="text"
+        placeholder="Digite seu nome completo" required>
+
+      <label for="cidade">Cidade:</label>
+      <input id="cidade" type="text"
+        placeholder="Ex.: Sobral - CE" required>
+
+      <label for="modalidade">Como deseja receber?</label>
+      <select id="modalidade" required>
+        <option value="Entrega">🛵 Entrega</option>
+        <option value="Retirada no local">📍 Retirada no local</option>
+      </select>
+
+      <div id="camposEntrega">
+        <label for="bairro">Bairro:</label>
+        <input id="bairro" type="text"
+          placeholder="Digite seu bairro">
+
+        <label for="endereco">Rua, número e complemento:</label>
+        <input id="endereco" type="text"
+          placeholder="Endereço para entrega">
+      </div>
+
+      <label for="pagamento">Forma de pagamento:</label>
+      <select id="pagamento" required>
+        <option value="Pix">💠 Pix</option>
+        <option value="Dinheiro">💵 Dinheiro</option>
+      </select>
+
+      <div id="campoTroco" hidden>
+        <label for="troco">Precisa de troco para quanto?</label>
+        <select id="troco">
+          <option value="Não precisa de troco">Não preciso de troco</option>
+          <option value="R$ 20">R$ 20</option>
+          <option value="R$ 50">R$ 50</option>
+          <option value="R$ 100">R$ 100</option>
+          <option value="Outro valor">Outro valor (combinar pelo WhatsApp)</option>
+        </select>
+      </div>
+
+      <label for="observacoes">Observações (opcional):</label>
+      <textarea id="observacoes" rows="3"
+        placeholder="Alguma informação sobre seu pedido?"></textarea>
+
+      <button class="whatsapp" type="submit">
+        📲 Enviar pedido pelo WhatsApp
+      </button>
+    </form>
 
     <p class="aviso">
-      Confira os sabores, pesos e valores antes de finalizar.
-      O pedido será enviado para confirmação pelo WhatsApp.
+      Seu pedido será enviado para confirmação.
+      A entrega, o frete e o pagamento serão combinados com a loja.
     </p>
   </section>
 </main>
@@ -253,18 +250,15 @@ footer {
 </footer>
 
 <script>
-/* COLOQUE SEU NÚMERO DO WHATSAPP AQUI.
-   Use código do Brasil + DDD + número, sem espaços.
-   Exemplo fictício: 5566992260204
-*/
+// NÚMERO DO WHATSAPP DA LOJA
 const WHATSAPP = "5566992260204";
 
 const sabores = [
   "Menta Fresca",
-  "Menta Fogo🔥",
-  "Menta Cereja🍒",
+  "Menta Fogo 🔥",
+  "Menta Cereja 🍒",
   "Menta Uva 🍇",
-  "Pura Folha🍃"
+  "Pura Folha 🍃"
 ];
 
 const tamanhos = [
@@ -303,7 +297,7 @@ function criarProdutos() {
       <input id="qtd${i}" type="number"
         min="1" step="1" value="1">
 
-      <button class="adicionar"
+      <button class="adicionar" type="button"
         onclick="adicionar(${i})">
         Adicionar ao carrinho +
       </button>
@@ -312,11 +306,13 @@ function criarProdutos() {
 }
 
 function adicionar(indice) {
-  const pesoEscolhido =
-    Number(document.getElementById("peso" + indice).value);
+  const pesoEscolhido = Number(
+    document.getElementById("peso" + indice).value
+  );
 
-  const quantidade =
-    Number(document.getElementById("qtd" + indice).value);
+  const quantidade = Number(
+    document.getElementById("qtd" + indice).value
+  );
 
   if (!Number.isInteger(quantidade) || quantidade < 1) {
     alert("Digite uma quantidade válida.");
@@ -334,10 +330,10 @@ function adicionar(indice) {
     existente.quantidade += quantidade;
   } else {
     carrinho.push({
-      sabor: sabor,
+      sabor,
       peso: tamanho.peso,
       preco: tamanho.preco,
-      quantidade: quantidade
+      quantidade
     });
   }
 
@@ -350,7 +346,7 @@ function mostrarCarrinho() {
   let total = 0;
 
   if (carrinho.length === 0) {
-    area.innerHTML = "Seu carrinho está vazio.";
+    area.textContent = "Seu carrinho está vazio.";
   } else {
     area.innerHTML = carrinho.map((item, i) => {
       const subtotal = item.preco * item.quantidade;
@@ -361,8 +357,8 @@ function mostrarCarrinho() {
           <strong>${item.sabor}</strong><br>
           Peso: ${item.peso}<br>
           Quantidade: ${item.quantidade}<br>
-          Preço: ${dinheiro(subtotal)}<br>
-          <button onclick="remover(${i})">
+          Subtotal: ${dinheiro(subtotal)}<br>
+          <button type="button" onclick="remover(${i})">
             Remover item
           </button>
         </div>
@@ -370,8 +366,7 @@ function mostrarCarrinho() {
     }).join("");
   }
 
-  document.getElementById("total").textContent =
-    dinheiro(total);
+  document.getElementById("total").textContent = dinheiro(total);
 }
 
 function remover(indice) {
@@ -384,42 +379,109 @@ function limparCarrinho() {
   mostrarCarrinho();
 }
 
-function enviarWhatsApp() {
-  if (carrinho.length === 0) {
-    alert("Adicione pelo menos um produto ao carrinho.");
-    return;
-  }
+// Mostra os campos de endereço apenas para entrega
+const modalidade = document.getElementById("modalidade");
+const camposEntrega = document.getElementById("camposEntrega");
+const bairro = document.getElementById("bairro");
+const endereco = document.getElementById("endereco");
 
-  if (!/^55\d{10,11}$/.test(WHATSAPP)) {
-    alert(
-      "Configure o número do WhatsApp no código antes de receber pedidos."
-    );
-    return;
-  }
+function atualizarEntrega() {
+  const entrega = modalidade.value === "Entrega";
 
-  let total = 0;
-
-  const linhas = carrinho.map(item => {
-    const subtotal = item.preco * item.quantidade;
-    total += subtotal;
-
-    return `• ${item.sabor} — ${item.peso} x ${item.quantidade}: ${dinheiro(subtotal)}`;
-  });
-
-  const mensagem =
-    "Olá! Quero fazer um pedido na Erva Verde 🌿\n\n" +
-    linhas.join("\n") +
-    "\n\nTotal: " + dinheiro(total) +
-    "\n\nGostaria de confirmar meu pedido e combinar a entrega.";
-
-  const url = "https://wa.me/" + WHATSAPP +
-    "?text=" + encodeURIComponent(mensagem);
-
-  window.open(url, "_blank");
+  camposEntrega.hidden = !entrega;
+  bairro.required = entrega;
+  endereco.required = entrega;
 }
+
+modalidade.addEventListener("change", atualizarEntrega);
+atualizarEntrega();
+
+// Mostra o campo de troco somente se pagar em dinheiro
+const pagamento = document.getElementById("pagamento");
+const campoTroco = document.getElementById("campoTroco");
+
+pagamento.addEventListener("change", function() {
+  campoTroco.hidden = pagamento.value !== "Dinheiro";
+});
+
+document.getElementById("formPedido").addEventListener(
+  "submit",
+  function(event) {
+    event.preventDefault();
+
+    if (carrinho.length === 0) {
+      alert("Adicione pelo menos um produto ao carrinho.");
+      return;
+    }
+
+    if (!/^55\d{10,11}$/.test(WHATSAPP)) {
+      alert("Confira o número do WhatsApp no código.");
+      return;
+    }
+
+    const nome = document.getElementById("nome").value.trim();
+    const cidade = document.getElementById("cidade").value.trim();
+    const formaEntrega = modalidade.value;
+    const formaPagamento = pagamento.value;
+    const observacoes =
+      document.getElementById("observacoes").value.trim();
+
+    if (!nome || !cidade) {
+      alert("Preencha seu nome e sua cidade.");
+      return;
+    }
+
+    if (formaEntrega === "Entrega" &&
+        (!bairro.value.trim() || !endereco.value.trim())) {
+      alert("Preencha o bairro e o endereço para a entrega.");
+      return;
+    }
+
+    let total = 0;
+
+    const linhas = carrinho.map(item => {
+      const subtotal = item.preco * item.quantidade;
+      total += subtotal;
+
+      return `• ${item.sabor} — ${item.peso} x ${item.quantidade}: ${dinheiro(subtotal)}`;
+    });
+
+    const troco = formaPagamento === "Dinheiro"
+      ? document.getElementById("troco").value
+      : "Não se aplica";
+
+    const mensagem =
+      "🌿 *PEDIDO — ERVA VERDE* 🌿\n\n" +
+      "*CLIENTE*\n" +
+      "Nome: " + nome + "\n" +
+      "Cidade: " + cidade + "\n\n" +
+      "*PRODUTOS*\n" + linhas.join("\n") + "\n\n" +
+      "*Total dos produtos: " + dinheiro(total) + "*\n\n" +
+      "*RECEBIMENTO*\n" +
+      "Modalidade: " + formaEntrega + "\n" +
+      (formaEntrega === "Entrega"
+        ? "Bairro: " + bairro.value.trim() + "\n" +
+          "Endereço: " + endereco.value.trim() + "\n"
+        : "") +
+      "\n*PAGAMENTO*\n" +
+      "Forma: " + formaPagamento + "\n" +
+      (formaPagamento === "Dinheiro"
+        ? "Troco: " + troco + "\n"
+        : "Pagamento via Pix a combinar com a loja.\n") +
+      (observacoes ? "\nObservações: " + observacoes + "\n" : "") +
+      "\nOlá! Gostaria de confirmar este pedido.";
+
+    const url = "https://wa.me/" + WHATSAPP +
+      "?text=" + encodeURIComponent(mensagem);
+
+    window.open(url, "_blank");
+  }
+);
 
 criarProdutos();
 mostrarCarrinho();
 </script>
 
 </body>
+</html>
+
